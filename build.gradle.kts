@@ -79,11 +79,11 @@ jib {
 	}
 	container {
 		labels = mapOf(
-			"maintainer" to "Ananth Pitchiah <er.ananth.pitchiah@gmail.com>",
+			"maintainer" to "Ananth Pitchiah <ananth.pitchiah.95@gmail.com>",
 			"org.opencontainers.image.title" to "med-search",
 			"org.opencontainers.image.description" to "Service to search medicines",
 			"org.opencontainers.image.version" to "$version",
-			"org.opencontainers.image.authors" to "Ananth Pitchiah <er.ananth.pitchiah@gmail.com>>",
+			"org.opencontainers.image.authors" to "Ananth Pitchiah <ananth.pitchiah.95@gmail.com>>",
 			"org.opencontainers.image.url" to "https://hub.docker.com/r/ananthpitchiah/med-search",
 			"org.opencontainers.image.vendor" to "https://hub.docker.com/u/ananthpitchiah",
 			"org.opencontainers.image.licenses" to "MIT"

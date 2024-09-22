@@ -39,6 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    needs: initialize
 
     steps:
       - name: Build with Gradle Wrapper
@@ -61,6 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    needs: initialize
 
     steps:
       - name: Run Unit Test Cases

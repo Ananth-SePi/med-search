@@ -36,7 +36,7 @@ jobs:
         uses: gradle/actions/wrapper-validation@v3
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew build
+        run: ./gradlew build -x test
 
       - name: Build and Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v4
@@ -57,8 +57,18 @@ jobs:
       contents: read
 
     steps:
+      - uses: actions/checkout@v4
       - name: Run Unit Test Cases
         run: ./gradlew test
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action/macos@v2
+        if: always()
+        with:
+          files: |
+            test-results/**/*.xml
+            test-results/**/*.trx
+            test-results/**/*.json
 
   dependency-submission:
     runs-on: ubuntu-latest

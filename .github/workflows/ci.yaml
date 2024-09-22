@@ -61,15 +61,6 @@ jobs:
       - name: Run Unit Test Cases
         run: ./gradlew test
 
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action/macos@v2
-        if: always()
-        with:
-          files: |
-            test-results/**/*.xml
-            test-results/**/*.trx
-            test-results/**/*.json
-
   dependency-submission:
     runs-on: ubuntu-latest
     permissions:

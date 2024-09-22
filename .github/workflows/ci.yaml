@@ -14,7 +14,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  initialize:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -35,6 +35,12 @@ jobs:
       - name: Validate Gradle Wrapper
         uses: gradle/actions/wrapper-validation@v3
 
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
       - name: Build with Gradle Wrapper
         run: ./gradlew build -x test
 
@@ -57,7 +63,6 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
       - name: Run Unit Test Cases
         run: ./gradlew test
 

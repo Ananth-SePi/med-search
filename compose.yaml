@@ -9,18 +9,24 @@ services:
       - 'POSTGRES_USER=postgres'
     ports:
       - '5432'
+    networks:
+      - med-search-network
   redis:
     image: 'redis:latest'
     ports:
       - '6379'
+    networks:
+      - med-search-network
   med-search:
     container_name: med-search
-    image: med-search:1.0.0
+    image: ananthpitchiah/med-search:1.0.0
     ports:
       - '18700-18790:8900'
     depends_on:
       - postgres
       - redis
+    networks:
+      - med-search-network
   prometheus:
     image: prom/prometheus:latest
     ports:
@@ -29,10 +35,12 @@ services:
       - ./prometheus:/etc/prometheus
       - prometheus-data:/prometheus
     command: --web.enable-lifecycle  --config.file=prometheus/prometheus.yml
+    networks:
+      - med-search-network
 
 volumes:
   prometheus-data:
 
 networks:
-  med-searcch-network:
+  med-search-network:
     driver: bridge

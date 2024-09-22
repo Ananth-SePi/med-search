@@ -32,14 +32,15 @@ jobs:
 
       - name: Validate Gradle Wrapper
         uses: gradle/actions/wrapper-validation@v3
-        
+
       - name: Build with Gradle Wrapper
         run: ./gradlew build -x test
 
       - name: Build and Push Docker Image
-        uses: mr-smithers-excellent/docker-build-push@v4
+        uses: mr-smithers-excellent/docker-build-push@v6
         with:
            image: ananthpitchiah/med-search
+           tags: 1.0.0, latest
            registry: docker.io
            username: ${{ secrets.DOCKER_USERNAME }}
            password: ${{ secrets.DOCKER_PASSWORD }}

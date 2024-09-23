@@ -25,6 +25,7 @@ class MedicineController(
             val medicines = medicineService.getMedicines(pageNumber, pageSize, queryString)
             return ResponseEntity.ok(medicines)
         } catch (exception: Exception) {
+            exception.printStackTrace()
             return ResponseEntity.internalServerError().build()
         }
     }

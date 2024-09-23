@@ -3,12 +3,20 @@ version: '3'
 services:
   postgres:
     image: 'postgres:latest'
+    restart: always
     environment:
       - 'POSTGRES_DB=postgres'
-      - 'POSTGRES_PASSWORD='
+      - 'POSTGRES_PASSWORD=postgres'
       - 'POSTGRES_USER=postgres'
     ports:
       - '5432'
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 1s
+      timeout: 5s
+      retries: 1
+    volumes:
+      - pg-data:/var/lib/postgresql/data
     networks:
       - med-search-network
   redis:
@@ -28,18 +36,20 @@ services:
     networks:
       - med-search-network
   prometheus:
+    container_name: med-search-prometheus
     image: prom/prometheus:latest
     ports:
       - '9000:9090'
     volumes:
       - ./prometheus:/etc/prometheus
       - prometheus-data:/prometheus
-    command: --web.enable-lifecycle  --config.file=prometheus/prometheus.yml
+    command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yaml
     networks:
       - med-search-network
 
 volumes:
   prometheus-data:
+  pg-data:
 
 networks:
   med-search-network:
